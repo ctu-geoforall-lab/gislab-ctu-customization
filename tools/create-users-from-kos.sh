@@ -7,7 +7,7 @@ fi
 
 process_csv() {
 SEP=','
-tail -n +3 $1 | while read line || [ -n "$line" ];
+tail -n +3 "$1" | while read line || [ -n "$line" ];
 do           
     fname=`echo $line | cut -d $SEP -f2 | iconv -f utf-8 -t us-ascii//TRANSLIT`
     sname=`echo $line | cut -d $SEP -f1 | iconv -f utf-8 -t us-ascii//TRANSLIT `
@@ -21,11 +21,15 @@ done
 }
 
 filepath="$1"
-filename=`basename $filepath`
-group=${filename%%.csv}
+filename=`basename "$filepath"`
+group=`echo "${filename%%.csv}" | cut -d'_' -f5 | sed 's/155//g' | tr '[:upper:]' '[:lower:]'`
+
+echo $filepath
+echo $filename
+echo $group
 
 sudo gislab-addgroup $group
-process_csv $filepath $group
+process_csv "$filepath" $group
 
 sudo gislab-deluser -f landa
 sudo gislab-adduser -g Martin -l Landa -m landa@gislab.fsv.cvut.cz -a $group -p martin landa
