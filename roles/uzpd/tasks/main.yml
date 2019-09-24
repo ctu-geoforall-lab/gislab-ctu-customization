@@ -1,0 +1,23 @@
+# UZPD customization
+
+- name: Create uzpd database 
+  postgresql_db:
+    name: "{{ dbname }}"
+    login_user: postgres
+    template: gismentors
+  register: db_created
+
+- name: Drop pc01-21 schemas
+  shell: psql -U postgres "{{ dbname }}" -c "DROP SCHEMA {{ item }}"
+  with_sequence: start=1 end=21 format=pc%02d
+  become: yes
+  when:
+    db_created.changed
+
+- name: Append after-add/before-delete script to server
+  blockinfile:
+    dest: "/opt/gislab/custom/accounts/{{ item }}/db"
+    block:  "{{ lookup('file', 'files/{{ item }}') }}"
+  with_items:
+    - after-add
+    - before-delete

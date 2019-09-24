@@ -1,0 +1,12 @@
+# Perform GIS.lab CTU customization
+
+- hosts: all
+  become: yes
+
+  vars:
+    from_dbname: gismentors
+    to_dbname: uzpd
+    
+  roles:
+    - { role: uzpd, tags: ['uzpd'] }    
+    - { role: customization-done, tags: ['customization-done'] }
