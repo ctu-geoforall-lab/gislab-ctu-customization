@@ -2,4 +2,5 @@ users_uzpd=`sudo gislab-listusers -g uzpd | grep 'uid:' | cut -d':' -f2`
 users_uzpr=`sudo gislab-listusers -g uzpr | grep 'uid:' | cut -d':' -f2`
 if [[ $users_uzpd =~ $GISLAB_USER ]] || [[ $users_uzpr =~ $GISLAB_USER ]]; then 
     drop_schema uzpd
+    drop_schema arccr500
 fi

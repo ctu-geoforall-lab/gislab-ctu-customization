@@ -21,3 +21,21 @@
   with_items:
     - after-add
     - before-delete
+
+- name: Check for arccr500.dump
+  stat:
+    path: /storage/repository/arccr500.dump
+  register: arccr500_dump
+
+- name: Create arccr500 database
+  postgresql_db:
+    name: "{{ dbname_arccr500 }}"
+    login_user: postgres
+    template: template5514
+  when: arccr500_dump.stat.exists == true
+  register: arccr500_db_created
+
+- name: Import data into arccr500 database
+  shell: pg_restore "/mnt/repository/{{ dbname_arccr500 }}.dump" | psql -U postgres "{{ dbname }}"
+  when:
+    arccr500_db_created.changed
