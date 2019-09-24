@@ -8,5 +8,6 @@
     to_dbname: uzpd
     
   roles:
-    - { role: uzpd, tags: ['uzpd'] }    
+    - { role: git3, tags: ['git3'] }
+    - { role: uzpd, tags: ['uzpd'] }
     - { role: customization-done, tags: ['customization-done'] }

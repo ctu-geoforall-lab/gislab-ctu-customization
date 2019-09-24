@@ -1,0 +1,12 @@
+packages_qt:
+  - build-essential
+  - qtcreator
+  - qt5-default
+
+packages_qt_doc:
+  - qt5-doc
+  - qt5-doc-html qtbase5-doc-html
+  - qtbase5-examples
+
+root_dir: "/opt/gislab/system/clients/desktop"
+apt_get_opts: "--assume-yes --force-yes"

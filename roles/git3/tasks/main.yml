@@ -1,0 +1,20 @@
+# 155GIT3 customization
+
+- name: Install Qt Creator
+  shell: >
+    export DEBIAN_FRONTEND=noninteractive
+    &&
+    chroot {{ root_dir }}/root
+    apt {{ apt_get_opts }} install {{ packages_qt|join(' ') }}
+  args:
+    executable: /bin/bash
+
+- name: Install documentation and examples
+
+  shell: >
+    export DEBIAN_FRONTEND=noninteractive
+    &&
+    chroot {{ root_dir }}/root
+    apt {{ apt_get_opts }} install {{ packages_qt_doc|join(' ') }}
+  args:
+    executable: /bin/bash
