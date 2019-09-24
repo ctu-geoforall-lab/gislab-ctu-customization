@@ -1,6 +1,7 @@
 # GIS.lab CTU customization
 
 * 155UZPD
+* 155GIT3
 
 ## Requirements
 
