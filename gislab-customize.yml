@@ -5,9 +5,9 @@
 
   vars:
     from_dbname: gismentors
-    to_dbname: uzpd
+    to_dbname: uzpr
     
   roles:
     - { role: git3, tags: ['git3'] }
-    - { role: uzpd, tags: ['uzpd'] }
+    - { role: uzpr, tags: ['uzpr'] }
     - { role: customization-done, tags: ['customization-done'] }

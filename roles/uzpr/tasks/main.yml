@@ -1,6 +1,6 @@
-# UZPD customization
+# UZPR customization
 
-- name: Create uzpd database 
+- name: Create uzpr database 
   postgresql_db:
     name: "{{ dbname }}"
     login_user: postgres
@@ -8,7 +8,7 @@
   register: db_created
 
 - name: Drop pc01-21 schemas
-  shell: psql -U postgres "{{ dbname }}" -c "DROP SCHEMA {{ item }}"
+  shell: psql -U postgres "{{ dbname }}" -c "DROP SCHEMA IF EXISTS {{ item }}"
   with_sequence: start=1 end=21 format=pc%02d
   become: yes
   when:
@@ -36,6 +36,6 @@
   register: arccr500_db_created
 
 - name: Import data into arccr500 database
-  shell: pg_restore "/mnt/repository/{{ dbname_arccr500 }}.dump" | psql -U postgres "{{ dbname }}"
+  shell: pg_restore "/mnt/repository/{{ dbname_arccr500 }}.dump" | psql -U postgres "{{ dbname_arccr500 }}"
   when:
     arccr500_db_created.changed
