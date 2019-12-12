@@ -1,0 +1,14 @@
+# 155GIT2 customization
+
+- name: Install Firehol
+  shell: >
+    export DEBIAN_FRONTEND=noninteractive
+    &&
+    chroot {{ root_dir }}/root
+    apt {{ apt_get_opts }} install firehol
+  args:
+    executable: /bin/bash
+
+- name: Copy Firehol configuration
+  src: firehol.conf
+  dest: /opt/gislab/system/clients/desktop/root/etc/firehol/firehol.conf
