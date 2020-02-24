@@ -31,7 +31,4 @@ echo $group
 sudo gislab-addgroup $group
 process_csv "$filepath" $group
 
-sudo gislab-deluser -f landa
-sudo gislab-adduser -g Martin -l Landa -m landa@gislab.fsv.cvut.cz -a $group -p martin landa
-
 exit 0
