@@ -1,0 +1,18 @@
+- name: Create docker directory
+  file:
+    path: "{{ docker_dir }}/jupyter"
+    state: directory
+    mode: 0755
+
+- name: Create docker-compose configuration
+  copy:
+    src: static/docker-compose.yaml
+    dest: "{{ docker_dir }}/jupyter/docker-compose.yaml"
+
+- name: Pull docker images associated with a service
+  docker_image:
+    name: jupyter/scipy-notebook
+    
+- name: Start docker service
+  docker_service:
+    project_src: "{{ docker_dir }}/jupyter"

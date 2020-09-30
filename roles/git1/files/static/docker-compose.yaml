@@ -1,0 +1,7 @@
+version:  '3'
+services:
+  gislab-notebook:
+      image: jupyter/scipy-notebook
+      ports:
+        - 8888:8888
+      command: "start-notebook.sh"
